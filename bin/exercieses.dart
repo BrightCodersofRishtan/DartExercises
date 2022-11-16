@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:exercieses/exercieses.dart' as exercieses;
@@ -254,7 +255,7 @@ List<int> newList(List<int> initialList) {
 Write a program that asks the user how many Fibonnaci numbers to generate and then generates them.
 Take this opportunity to think about how you can use functions.
 
-Make sure to ask the user to enter the number of numbers in the sequence to generate.*/
+Make sure to ask the user to enter the number of numbers in the sequence to generate.
 void main(List<String> args) {
   stdout.write("How many Fibonacci numbers do you want? ");
   int chosenNumber = int.parse(stdin.readLineSync()!);
@@ -270,4 +271,137 @@ List<int> fibonacciNumbers(int chosenNumber) {
     fibList.add(fibList[i] + fibList[i + 1]);
   }
   return fibList;
+}
+*/
+
+/*ex14
+Write a program (function) that takes a list and returns a new list that contains
+all the elements of the first list minus all the duplicates.
+
+void main(List<String> args) {
+  final random = Random();
+
+  List<int> randList = List.generate(10, (_) => random.nextInt(10));
+  print("Initial list is $randList\n");
+  print("Cleaned list is ${removeDuplicates(randList)}");
+}
+
+List<int> removeDuplicates(List<int> initialList) {
+  return initialList.toSet().toList();
+}
+*/
+
+/*ex15
+
+void main(List<String> args) {
+  stdout.write("Please give a sentence: ");
+  String sentence = stdin.readLineSync()!.toLowerCase();
+
+  reverseSentence(sentence);
+}
+
+void reverseSentence(String sentence) {
+  // Splite the setence into a list of words
+  // reverse the list, then join the words back
+  String a = sentence.split(" ").reversed.toList().join(" ");
+  print(a);
+}
+*/
+
+/*Ex16
+
+void main() {
+  stdout.write("How strong a password do you want? Weak, Medium or Strong");
+  String choice = stdin.readLineSync()!.toLowerCase();
+
+  passwordGenerator(choice);
+}
+
+// creat a random sequence of characters
+void shuffleGenerator(int strength) {
+  final random = Random.secure();
+  List<int> intList = List.generate(strength, (_) => random.nextInt(255));
+  List charList = base64UrlEncode(intList).split('').toList();
+  charList.shuffle();
+  print("\nYour password is: ${charList.join('')}\n");
+}
+
+void passwordGenerator(String strength) {
+  if (strength == "weak") {
+    shuffleGenerator(5);
+  } else if (strength == "medium") {
+    shuffleGenerator(15);
+  } else if (strength == "strong") {
+    shuffleGenerator(25);
+  } else {
+    print("Incorect word is given");
+  }
+}
+*/
+/*
+ex17
+
+void main(List<String> args) {
+  // generate random number
+  // range is betwen 1000 and 9999
+  final random = Random();
+  String randomNumber = (1000 + random.nextInt(9999 - 1000)).toString();
+  print(randomNumber);
+
+  stdout.write("Welcome to Caws and Bulls\nType 'exit' to stop the game\n");
+  int attempts = 0;
+  // Actual game
+  while (true) {
+    int cows = 0;
+    int bulls = 0;
+    attempts += 1;
+
+    stdout.write("\nPlease choose a four digit number");
+    String chosenNumber = stdin.readLineSync()!;
+
+    // Conditions to check if the game is over
+    if (chosenNumber == randomNumber) {
+      print("Bullseye! You took $attempts attempts");
+      break;
+    } else if (chosenNumber == "exit") {
+      print("Bye Bye!");
+      break;
+    } else if (chosenNumber.length != randomNumber.length) {
+      print("Incorrect Number. make sure to give 4 digit number");
+      continue;
+    }
+    // if a digit number is in the same index incorect
+    for (var i = 0; i < randomNumber.length; i++) {
+      if (chosenNumber[i] == randomNumber[i]) {
+        cows += 1;
+      } else if (randomNumber.contains(chosenNumber[i])) {
+        bulls += 1;
+      }
+    }
+    print("\nAttempts:$attempts \nCows:$cows, Bulls: $bulls");
+  }
+}
+*/
+
+void main(List<String> args) {
+  stdout.write("What squer size do you want:");
+  int userChoice = int.parse(stdin.readLineSync()!);
+  print("Here is a $userChoice by $userChoice board: \n");
+
+  drawBoard(userChoice);
+}
+
+void drawBoard(int SquareSize) {
+  // basic buildings block
+  String rowLine = "---";
+  String colLine = "|  ";
+
+  // for loop for drawing the board
+  for (var i = 0; i < SquareSize; i++) {
+    print(rowLine * SquareSize);
+    print(colLine * (SquareSize + 1));
+  }
+
+  // Add the last line to the board
+  print("${rowLine * SquareSize}");
 }
